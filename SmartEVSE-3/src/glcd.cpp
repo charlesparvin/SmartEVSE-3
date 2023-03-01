@@ -624,7 +624,8 @@ void GLCD(void) {
             for (x = 73; x < 96; x++) GLCDbuf[3u * 128u + x] = 0;
         }
 
-        if (LCDToggle && Mode == MODE_SOLAR) {                                  // Show Sum of currents when solar charging.
+        // Always show compact display when single-phase charging
+        if (Nr_Of_Phases_Charging <= 1 || (LCDToggle && Mode == MODE_SOLAR)) {   // Show Sum of currents when solar charging.
             GLCDx = 41;
             GLCDy = 1;
             GLCD_write_buf(0x0B, 0);                                            // Sum symbol
